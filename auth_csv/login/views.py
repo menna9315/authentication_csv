@@ -13,6 +13,8 @@ def login(request):
     if request.method == "POST":
         with open('/home/menna/django_task/auth_csv/login/data.csv') as csvDataFile:
             csvReader = csv.reader(csvDataFile)
+            next(csvReader, None)
+
             names=[]
             passwords=[]
             for row in csvReader:
@@ -20,7 +22,6 @@ def login(request):
                 passw=row[1]
                 names.append(name)
                 passwords.append(passw)
-            
             for index, value in enumerate(names):
                 if names[index] ==request.POST['username']:
                     for idx, val in enumerate(passwords):
